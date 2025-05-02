@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\ServerController;
+
+Route::get('/getSeasons', [ServerController::class, 'getSeasons'])->name('getSeasons');
+
+Route::get('/getSeasonName', [ServerController::class, 'getSeasonName'])->name('getSeasonName');
+
+Route::get('/getSeasonPuzzles', [ServerController::class, 'getSeasonPuzzles'])->name('getSeasonPuzzles');
+
+Route::get('/getPuzzleContent', [ServerController::class, 'getPuzzleContent'])->name('getPuzzleContent');
