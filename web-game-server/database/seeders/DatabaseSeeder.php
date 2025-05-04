@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             addSeasons::class,
             addPuzzleStates::class,
-            addPuzzleHeaders::class,
             addPuzzleDifficulty::class,
             addPuzzles::class
         ]);

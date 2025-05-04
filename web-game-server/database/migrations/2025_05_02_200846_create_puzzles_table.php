@@ -13,10 +13,19 @@ return new class extends Migration
     {
         Schema::create('puzzles', function (Blueprint $table) {
             $table->id();
+            $table->string('puzzleID');
+            $table->string('name');
+            $table->string('image');
             $table->text('flavorText');
             $table->mediumText('content');
+            $table->json('coordCheck')->nullable();
+            $table->json('constellationData')->nullable();
+            $table->unsignedBigInteger('puzzleSeason');
+            $table->unsignedBigInteger('puzzleState');
             $table->unsignedBigInteger('difficulty');
 
+            $table->foreign('puzzleSeason')->on('seasons')->references('id');
+            $table->foreign('puzzleState')->on('puzzle_state')->references('id');
             $table->foreign('difficulty')->on('puzzle_difficulty')->references('id');
         });
     }
