@@ -27,7 +27,9 @@ class ServerController extends Controller
     }
 
     public function getSeasonPuzzles(Request $request) {
-        return response()->json(Puzzle::select('puzzleID', 'name', 'image', 'puzzleState')->where('puzzleSeason', $request->seasonID)->get());
+        return response()->json(DB::select(
+            "SELECT puzzleID, name, image, puzzleState FROM puzzles WHERE puzzleSeason = " . $request->seasonID . " AND puzzleState != 1"
+        ));
     }
 
     public function getPuzzleContent(Request $request) {
@@ -57,5 +59,15 @@ class ServerController extends Controller
              FROM puzzles AS p
              JOIN puzzle_difficulty AS d ON d.id = p.difficulty WHERE p.puzzleID = '" . $request->puzzleID . "'"
         ));
+    }
+
+    public function resetGame() {
+        DB::statement("UPDATE puzzles SET puzzleState = CASE WHEN (id-1) % 6 = 0 THEN 2 ELSE 1 END");
+        return response()->json("{}");
+    }
+
+    public function unlockAllPuzzles() {
+        DB::statement("UPDATE puzzles SET puzzleState = 2");
+        return response()->json("{}");
     }
 }

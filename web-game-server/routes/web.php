@@ -15,3 +15,7 @@ Route::get('/getPuzzleContent', [ServerController::class, 'getPuzzleContent'])->
 Route::post('/getConstellationCheck', [ServerController::class, 'getConstellationCheck'])->name('getConstellationCheck');
 
 Route::get('/getConstellationData', [ServerController::class, 'getConstellationData'])->name('getConstellationData');
+
+Route::get('/resetGame', [ServerController::class, 'resetGame'])->name('resetName');
+
+Route::get('/unlockAllPuzzles', [ServerController::class, 'unlockAllPuzzles'])->name('unlockAllPuzzles');
